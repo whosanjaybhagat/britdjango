@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+
+{% block mymessage %}
+
+
+<!-- dynamicformapp/templates/dynamicformapp/dynamic_form.html -->
+
+<style>
+    .form-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .form-field {
+        margin-right: 10px;
+    }
+
+    .form-label {
+        margin-right: 5px;
+    }
+</style>
+
+<form method="post" action="{% url 'dynamic_form_view' %}" id="dynamic-form">
+    {% csrf_token %}
+    <div id="form-container">
+        {{ formset.management_form }}
+        {% for form in formset %}
+            <div class="form-row">
+                {{ form.as_p }}
+            </div>
+        {% endfor %}
+    </div>
+    <button type="button" id="add-data">Add Data</button>
+    <button type="submit">Submit</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const formContainer = $('#form-container');
+        const addDataButton = $('#add-data');
+        let totalForms = $('#id_form-TOTAL_FORMS');
+
+        addDataButton.on('click', function () {
+            // Manually handle formset management form
+            const managementForm = formContainer.find('input[name="form-TOTAL_FORMS"]');
+            const newFormIndex = parseInt(managementForm.val());
+
+            // Create a new form row dynamically
+            const newForm = formContainer.find('.form-row:first').clone(true);
+            newForm.find('input[type="text"]').val('');
+            
+            // Update input names to include a unique index
+            newForm.find('input, select, textarea').each(function () {
+                const name = $(this).attr('name');
+                const newName = name.replace(/\d+/, newFormIndex);
+                $(this).attr('name', newName);
+                $(this).attr('id', `id_${newName}`);
+            });
+
+            newForm.insertAfter(formContainer.find('.form-row:last'));
+
+            // Update the management form
+            managementForm.val(newFormIndex + 1);
+        });
+    });
+</script>
+
+
+
+
+
+
+{%  endblock %}
+

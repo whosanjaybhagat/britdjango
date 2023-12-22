@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+{% block mymessage %}
+
+
+<body>
+
+    <h2>Dynamic Input Fields</h2>
+    
+    <form action="/login_details/" method="post" id="dynamic-form">
+        {% csrf_token %}{{ form.as_p }}
+        <div id="input-container">
+            <!-- Input fields will be added here dynamically -->
+        </div>
+        <button type="button" onclick="addInput()">Add Input Field</button>
+        <button type="submit">Submit</button>
+    </form>
+    
+    <script>
+        function addInput() {
+            var container = document.getElementById('input-container');
+    
+            // Create a new input element
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = 'Item'
+            input.name = 'dynamic-input[]'; // You can adjust the name as needed
+    
+            // Append the input element to the container
+            container.appendChild(input);
+            // Create a new input element
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = 'Price'
+            input.price = 'dynamic-input[]'; // You can adjust the name as needed
+    
+            // Append the input element to the container
+            container.appendChild(input);
+        }
+    </script>
+    
+    </body>
+
+{% endblock %}     

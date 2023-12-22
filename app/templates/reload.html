@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block mymessage %}
+
+<form action="{% url 'dynamic_form_view' %}" method="post">
+
+    {% csrf_token %}
+      <div class="form-row align-items-center">
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-2"> DReload</button>
+        </div>
+      </div>
+  </form>
+
+
+{% endblock %} 
