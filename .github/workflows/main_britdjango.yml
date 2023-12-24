@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'britdjango'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_99D66C5FE2074CB08C162940241B80CB }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8F742C37A010439EB702A871D927E049 }}
