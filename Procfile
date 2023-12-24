@@ -1,1 +1,1 @@
-web: gunicorn --bind=0.0.0.0:8000 brit.wsgi:application
+web: gunicorn --bind=0.0.0.0 --timeout 600 brit.wsgi:application        
